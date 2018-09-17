@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RicardoAppExercise</string>
+    <string name="test">using mvvm</string>
+</resources>
