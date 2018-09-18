@@ -11,10 +11,12 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.example.nischal.ricardoappexercise.data.common.LiveDataResponse;
+
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
 
-public abstract class BaseActivity extends AppCompatActivity{
+public abstract class BaseActivity<V extends BaseViewModel> extends AppCompatActivity{
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         performDependencyInjection();
@@ -24,6 +26,9 @@ public abstract class BaseActivity extends AppCompatActivity{
 
     public abstract @LayoutRes
     int getLayoutId();
+
+    public abstract void init();
+    public abstract void processResponse(LiveDataResponse liveDataResponse);
 
     public void performDependencyInjection(){
         AndroidInjection.inject(this);

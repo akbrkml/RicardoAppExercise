@@ -4,6 +4,11 @@ import android.app.Application;
 import android.content.Context;
 import android.content.res.Resources;
 
+import com.example.nischal.ricardoappexercise.data.AppDataManager;
+import com.example.nischal.ricardoappexercise.data.DataManager;
+import com.example.nischal.ricardoappexercise.util.rx.AppSchedulerProvider;
+import com.example.nischal.ricardoappexercise.util.rx.SchedulerProvider;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -22,5 +27,16 @@ public class AppModule {
     @Singleton
     Resources provideResources(Application application){
         return application.getResources();
+    }
+
+    @Provides
+    SchedulerProvider provideSchedulerProvider() {
+        return new AppSchedulerProvider();
+    }
+
+    @Provides
+    @Singleton
+    DataManager provideDataManager(AppDataManager appDataManager) {
+        return appDataManager;
     }
 }

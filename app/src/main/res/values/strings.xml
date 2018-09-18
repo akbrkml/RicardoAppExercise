@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">RicardoAppExercise</string>
     <string name="test">using mvvm</string>
+    <string name="login">Login</string>
+    <string name="email_hint">email</string>
+    <string name="password_hint">password</string>
 </resources>
