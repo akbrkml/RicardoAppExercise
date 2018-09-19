@@ -17,17 +17,27 @@ import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
 
 public abstract class BaseActivity<V extends BaseViewModel> extends AppCompatActivity{
+    private V viewModel;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         performDependencyInjection();
         super.onCreate(savedInstanceState);
+        performBindingViewModel();
         performButterKnifeBind();
     }
+
+    private void performBindingViewModel() {
+        this.viewModel = viewModel == null? getViewModel() : viewModel;
+    }
+
+    protected abstract V getViewModel();
+
+    public abstract void init();
 
     public abstract @LayoutRes
     int getLayoutId();
 
-    public abstract void init();
     public abstract void processResponse(LiveDataResponse liveDataResponse);
 
     public void performDependencyInjection(){

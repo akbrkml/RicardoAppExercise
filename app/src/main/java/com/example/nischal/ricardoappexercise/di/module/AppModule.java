@@ -6,6 +6,10 @@ import android.content.res.Resources;
 
 import com.example.nischal.ricardoappexercise.data.AppDataManager;
 import com.example.nischal.ricardoappexercise.data.DataManager;
+import com.example.nischal.ricardoappexercise.data.local.prefs.AppPreferenceHelper;
+import com.example.nischal.ricardoappexercise.data.local.prefs.PreferencesHelper;
+import com.example.nischal.ricardoappexercise.di.PreferenceInfo;
+import com.example.nischal.ricardoappexercise.helper.AppConstants;
 import com.example.nischal.ricardoappexercise.util.rx.AppSchedulerProvider;
 import com.example.nischal.ricardoappexercise.util.rx.SchedulerProvider;
 
@@ -38,5 +42,17 @@ public class AppModule {
     @Singleton
     DataManager provideDataManager(AppDataManager appDataManager) {
         return appDataManager;
+    }
+
+    @Provides
+    @PreferenceInfo
+    String providePreferenceName() {
+        return AppConstants.PREF_NAME;
+    }
+
+    @Provides
+    @Singleton
+    PreferencesHelper providePreferenceHelper(AppPreferenceHelper preferenceHelper){
+        return preferenceHelper;
     }
 }

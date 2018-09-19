@@ -4,6 +4,10 @@ public class AppConstants {
 
     public static final int REQUEST_USER_LOGIN = 0001;
 
+    public static final String PREF_NAME = "Ricardo_farm";
+
+    public static final Integer NULL_INDEX = 0;
+
     public class BASEURL {
         public static final String url_draftserver = "http://ent.draftserver.com/ricardofarm/public/api/v1.1.1/";
         public static final String url_saurav_local = "http://192.168.0.231:1234/api/v1.2/";

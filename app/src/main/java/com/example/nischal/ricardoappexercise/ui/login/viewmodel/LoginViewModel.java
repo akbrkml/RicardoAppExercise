@@ -56,7 +56,10 @@ public class LoginViewModel extends BaseViewModel<LoginResponse,LoginNavigator> 
                                     setBaseModel(response.body());
                                     switch(response.body().status){
                                         case AppConstants.VerificationCode.SUCCESS:
+                                            String authKey = list.values("Authorization").get(0);
+                                            saveInSharedPreferences(response.body().data, authKey);
                                             Log.i("response ", response.body().message);
+                                            getResponse().setValue(LiveDataResponse.success(getBaseModel(), request_code));
                                             break;
                                         case AppConstants.VerificationCode.CONTACT_NOT_VERIFIED:
                                             Log.i("response ", response.body().message);
@@ -76,6 +79,34 @@ public class LoginViewModel extends BaseViewModel<LoginResponse,LoginNavigator> 
                 );
             }
         }
+    }
+
+    private void saveInSharedPreferences(LoginResponse.Data data, String authKey) {
+        getDataManager().setLoginFlag(true);
+        getDataManager().setAuthToken(authKey);
+        Log.d("authtoken",getDataManager().getAuthToken());
+        getDataManager().setCurrentUserName(data.name);
+        getDataManager().setCurrentUserEmail(data.email);
+        getDataManager().setCurrentUserId(data.id);
+        getDataManager().setPaymentSetupInfo(data.paymentHelp);
+        getDataManager().setSubscribed(data.subscribed);
+        getDataManager().setSubscriptionStatusPref(data.subscriptionStatus);
+        Log.d("useridlogin",getDataManager().getCurrentUserId()+"");
+        getDataManager().setPhoneNumber(data.phoneNumber);
+        getDataManager().setPhoneCode(data.phoneCode);
+        getDataManager().setGroupId(data.groupId);
+        getDataManager().setCountryName(data.country);
+        getDataManager().setFarmCount(data.farmCount);
+        if(data.avatar!=null){
+            getDataManager().setProfileImage(data.avatar.path);
+        }else{
+            getDataManager().setProfileImage("");
+        }
+    }
+
+    @Override
+    public void openSelectUserRegisterActivity() {
+        getNavigator().openSelectUserRegisterActivity();
     }
 
     private boolean isValid(LoginRequest loginRequest) {

@@ -1,6 +1,7 @@
 package com.example.nischal.ricardoappexercise.data;
 
+import com.example.nischal.ricardoappexercise.data.local.prefs.PreferencesHelper;
 import com.example.nischal.ricardoappexercise.data.remote.ApiServices;
 
-public interface DataManager extends ApiServices {
+public interface DataManager extends ApiServices, PreferencesHelper {
 }

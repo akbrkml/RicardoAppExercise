@@ -13,6 +13,7 @@ import io.reactivex.disposables.CompositeDisposable;
 public abstract class BaseViewModel<M, N> extends ViewModel implements LifecycleObserver{
 
     private M baseModel;
+    private N navigator;
     private DataManager dataManager;
     private CompositeDisposable compositeDisposable;
     private final SchedulerProvider schedulerProvider;
@@ -31,6 +32,14 @@ public abstract class BaseViewModel<M, N> extends ViewModel implements Lifecycle
 
     public void setBaseModel(M baseModel) {
         this.baseModel = baseModel;
+    }
+
+    public N getNavigator() {
+        return navigator;
+    }
+
+    public void setNavigator(N navigator) {
+        this.navigator = navigator;
     }
 
     public DataManager getDataManager() {
