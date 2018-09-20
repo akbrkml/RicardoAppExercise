@@ -5,6 +5,8 @@ public class AppConstants {
     public static final int REQUEST_USER_LOGIN = 0001;
 
     public static final String PREF_NAME = "Ricardo_farm";
+    public static final String DB_NAME = "Ricardo_Farm.realm";
+
 
     public static final Integer NULL_INDEX = 0;
 

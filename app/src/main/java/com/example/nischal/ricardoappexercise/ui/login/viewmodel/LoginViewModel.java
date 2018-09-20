@@ -58,6 +58,7 @@ public class LoginViewModel extends BaseViewModel<LoginResponse,LoginNavigator> 
                                         case AppConstants.VerificationCode.SUCCESS:
                                             String authKey = list.values("Authorization").get(0);
                                             saveInSharedPreferences(response.body().data, authKey);
+                                            saveInDatabase(response.body());
                                             Log.i("response ", response.body().message);
                                             getResponse().setValue(LiveDataResponse.success(getBaseModel(), request_code));
                                             break;
@@ -79,6 +80,10 @@ public class LoginViewModel extends BaseViewModel<LoginResponse,LoginNavigator> 
                 );
             }
         }
+    }
+
+    private void saveInDatabase(LoginResponse body) {
+        getDataManager().addUsers(body.data);
     }
 
     private void saveInSharedPreferences(LoginResponse.Data data, String authKey) {
